@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+
+{% block title %} Shopcart {% endblock title %}
+
+     
+<!-- Header   -->
+{% block prod-header %} {% include "prod-header.html" %} {% endblock prod-header %}
+<!-- Header done  -->
+
+
+{% block prod-content %}
+<style>
+    .cart-page{
+        padding: 30px;
+    }
+    .shopcart-img{
+        width: 30%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    th {
+        color: rgb(240, 18, 18);
+        font-size: larger;
+        padding-left: 40px;
+        text-align: center;
+    }
+    td {
+        padding-left: 40px;
+        text-align: center;
+    }
+    
+</style>
+
+    <!-- Cart items details  -->
+    {% if shopcart %}
+      
+    
+    <div class="small-container cart-page">
+        <table class="table">
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Size</th>
+                <th scope="col">Amount</th>
+            </tr>
+    {% endif %}
+        {% if shopcart %}            
+            {% for item in shopcart %}
+                <tr class="">
+                    <td>
+                        <div class="cart-info">
+                            <img src="{{item.product.image.url}}" class="image-fluid mt-4 shopcart-img">
+                            <div>
+                                <p>{{item.product.title}}</p>
+                                <small class="fw-bold fs-4">
+                                    {% if item.product.discount_price %}
+                                        <span>&#8358;{{ item.product.discount_price | floatformat:2 | intcomma }}</span>
+                                    {% else %}
+                                        <span>&#8358;{{ item.product.price | floatformat:2 | intcomma}}</span>
+                                    {% endif %}                                                    
+                                </small>
+                                <br>
+                                <a href="{% url 'order:deletefromcart' item.id %}" class="text-decoration-none text-danger">Remove</a>
+                                <form  action="{% url 'order:updatequantity' %}" method="post"  class="mb-5">
+                                {% csrf_token %}
+                                    <input style="width: 70px; height:20px" type="number"  id="item" name="itemquantity" value="{{item.quantity}}" min="{{item.product.minquantity}}" max="{{item.product.quantity_instock}}">                                    
+                                    <button type="submit" class="btn-primary btn" style="font-size: 12px;border:none;border:none; outline:none">Update Quantity</button>
+                                    <input type="hidden" name="itemid" value="{{ item.id }}">
+                                </form>
+                            </div>  
+                        </div>    
+                    </td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.size}}</td>
+                    <td>&#8358;{{item.amount | floatformat:2 | intcomma}}</td>  
+                </tr>
+            {% endfor %}
+        {% else %}
+            <h5 class="ms-5 ps-5 mt-5 mb-5">No item in ShopCart yet!</h5>
+        {% endif %}
+        </table>
+        {% if shopcart %}
+        <div class="total-price">
+          <table class="table table-striped">
+            <tr>
+                <td>Subtotal</td>
+                <td>&#8358;{{subtotal | floatformat:2 | intcomma}}</td>
+            </tr>
+            <tr>
+                <td>Shipping</td>
+                <td>&#8358;{{shipping | floatformat:2 | intcomma}}</td>
+            </tr>
+            <tr>
+                <td>Vat(7.50%)</td>
+                <td>&#8358;{{vat | floatformat:2 | intcomma}}</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>&#8358;{{total | floatformat:2 | intcomma}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="total-price mt-2">
+            <table>
+              <tr>
+                  <td><a href="{% url 'category' %}" class="btn btn-warning">Continue</a></td>
+                  <td><a href="{% url 'order:checkout' %}" class="btn btn-success">Checkout</a></td>
+              </tr>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+    <!-- cart items details end here  -->
+    {% if shopcart %}
+        <!-- footer   -->
+        {% include "footer.html" %} 
+        <!-- footer done  -->
+    {% endif %}
+{% endblock prod-content %}
+

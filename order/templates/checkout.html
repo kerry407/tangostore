@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} Checkout {% endblock title %}
+    
+
+        
+
+<!-- Header and banner  -->
+{% block prod-header %} {% include "prod-header.html" %} {% endblock prod-header %}
+<!-- Header and banner done  -->
+
+<!-- Content  -->
+{% block content %}  
+<style>
+    .mx-auto {
+        width: 400px;
+        margin-bottom: 100px;
+    }
+    .form-control {
+        margin-bottom: 10px;
+        width: 300px;
+    }
+    td{
+        padding: 25px;
+    }
+    th {
+        text-align: center;
+    }
+    .cart-info {
+        text-align: center;
+    }
+    strong {
+        color: rgb(240, 18, 18);
+    }
+    
+</style>
+   <!-- Checkout Page  -->
+    <div class="checkout-page" style="padding: 50px 0;">
+        <h2 class="title mx-auto fw-bold fs-1">Checkout Page</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-5">
+                    <div class="form-container">
+                        <div class="form-buttons">
+                            <h4 class="title mb-5"><strong>Order</strong> Details</h4>
+                        </div>
+                        <form action="{% url 'order:placeorder' %}" method="POST">
+                        {% csrf_token %}
+                            <input type="text" class="form-control" value="{{profile.first_name}}" placeholder="First Name">
+                            <input type="text" class="form-control" value="{{profile.last_name}}" placeholder="Last Name">
+                            <input type="text" class="form-control" value="{{profile.phone}}" placeholder="Phone Number">
+                            <input type="text" class="form-control" value="{{profile.address}}" placeholder="Address">
+                            <input type="text" class="form-control" value="{{profile.city}}" placeholder="City">
+                            <input type="text" class="form-control" value="{{profile.state}}" placeholder="State">
+                            <input type="text" class="form-control" value="{{profile.country}}" placeholder="Country">
+                            <input type="hidden" class="form-control" name="amount" value="{{total}}">
+                            <input type="hidden" class="form-control" name="order_number" value="{{order_code}}">
+                            <button type="submit"  class="btn btn-outline-success mt-4">Proceed To Order</button>
+                        </form>	  
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="small-container cart-page" style="height: 520px;width:520px;">
+                        <h4 class="title mb-5 mx-auto"><strong>Delivery</strong> Details</h4>
+                        <table>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                                <th>Amount(&#8358;)</th>
+                            </tr>
+                        {% if shopcart %}            
+                            {% for item in shopcart %}
+                                <tr class="text-wrap">
+                                    <td>
+                                        <div class="cart-info">
+                                            <div>
+                                                <p>{{item.product.title}}</p>
+                                            </div>  
+                                        </div>    
+                                    </td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.size}}</td>
+                                    <td>{{item.amount | floatformat:2 | intcomma}}</td>  
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </table>
+                        <div class="total-price fw-bold fs-4 text-success mb-5">
+                          <table class="ms-5">
+                            <tr>
+                                <td>Total</td>
+                                <td>&#8358;{{total | floatformat:2 | intcomma}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Checkout Page Done  -->
+
+   {% endblock content %}                       
+   <!-- Content done  -->
+
+
+   
+
+
+    

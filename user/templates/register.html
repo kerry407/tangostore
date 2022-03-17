@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block user-content %}
+  
+  <div class="container mt-5 pt-5">
+      <div class="mx-auto" style="width: 450px;">
+          <legend class="fw-bold mx-auto ms-5 ps-5">Register with us today</legend>
+        <div class="registerform">
+          <form class=""  method="POST" action="{% url 'register' %}">
+            {% csrf_token %} 
+                <div class="mb-3">
+                    <input type="name" class="form-control" id="exampleInputName" placeholder="First Name" name="first_name">
+                </div>
+                <div class="mb-3">
+                    <input type="name" class="form-control" id="exampleInputName" placeholder="Surname" name="last_name">
+                </div>
+                <div class="mb-3">
+                    <input type="name" class="form-control" id="exampleInputName" placeholder="username" name="username">
+                </div>
+                <div class="mb-3">                       
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email address" name="email">
+                </div>
+                <div class="mb-3">                           
+                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="password1">
+                </div>
+                <div class="mb-3">                            
+                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Repeat password" name="password2">
+                </div>
+                <div class="mx-auto" style="width: 350px;">
+                    <button type="submit" class="btn btn-success ms-1 ">Sign Up</button>
+                    <a href="{% url 'login' %}" class="text-muted ms-2">Already a member?</a>
+                </div>
+            </form>
+
+            <a href="{% url 'index' %}" class="text-muted text-center ms-1">Back Home <i class="fa fa-home text-primary"></i></a>
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+                <strong><i class="fa fa-exclamation-triangle me-2"></i>ERROR!</strong> {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+  </div>
+     
+{% endblock user-content %}

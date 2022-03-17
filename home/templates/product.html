@@ -1,0 +1,198 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Products
+{% endblock title %}
+
+
+{% load humanize %}
+
+
+
+
+
+
+{% block prod-content %}
+{% load static %}
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montez&family=Open+Sans+Condensed:wght@300&family=Playfair+Display&display=swap');
+
+.badge{
+width: 20px;
+height: 20px;
+background-color: rgb(240, 18, 18);
+border-radius: 15px;
+padding-right: 12px;
+position: relative;
+bottom: 15px;
+right: 10px;
+}
+.profile-btn, .profile-btn:hover {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    color: #ff6a00;
+    background-color: rgb(255, 255, 255);
+    border-bottom-width: 2px;
+    text-shadow: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+li .nav-link small{
+    color: rgb(12, 12, 12);
+    font-size: 0.9rem;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+li .nav-link small:hover{
+    color: #ff6a00;
+}
+.fa-shopping-bag {
+    color: #c76520;
+}
+.fa-user {
+    padding: 0 5px;
+    color: #ff6a00;
+} 
+.navbar-brand {
+    font-family: 'Monoton', cursive;
+    font-size: 2rem;
+   
+}
+.navbar-brand h3 {
+    color: #ff6a00;
+    
+}
+</style>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"><h3>tango <i class="fa fa-shopping-bag"></i></h3></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+       
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">     
+            {% if user.id is not None %}                   
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><small>Home</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><small>Sign-out</small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'order:shopcart' %}"><i class="fa fa-cart-plus fs-3 text-warning"></i>
+                            {% if itemcount > 0 %}
+                                <span class="badge red ">{{ itemcount }}</span>
+                            {% else %}
+                                <span class="badge red ">0</span>
+                            {% endif %} 
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex" method="get">
+                    <a href="{% url 'userprofile' %}" class="profile-btn text-decoration-none fw-bold me-1">{{request.user.first_name}}</a> 
+                    <input class="form-control me-2" type="search" placeholder="Search Products under this category" aria-label="Search" name="title">
+                    <!-- {{myFilter.form}} -->
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><small>Home</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"><small>Sign In</small></a>
+                    </li>
+                </ul>
+                <form class="d-flex" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search Products under this category" aria-label="Search" name="title">
+                    <!-- {{myFilter.form}} -->
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            {% endif %}
+            </div>
+        
+    </div>
+</nav>
+    
+        {% for products in product %}
+            <div class="container mx-auto mt-5 text-center"><h4 class="h4 text-dark fw-bold fs-2 "><span>{{products.category}}</span> Products</h4></div>
+        {% endfor %}
+        <div class="container-fluid">
+            <div class="row p-5">
+                {% if products %}
+                    {% for item in products %}
+                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
+                        <div class="card">
+                            <div class="card-div">
+                                <a href="{% url 'prod_detail' item.id item.slug %}"><img src="{{item.image.url}}" alt=""  height="260" class="image-fluid"></a>
+                            </div>
+                            <div class="card-block">
+                            <span class="card-title">{{item.title}}</span>
+                            <p class="primera mt-3">
+                                {% if item.discount_price %}
+                                <small><del><em>&#8358;{{item.price | floatformat:2 | intcomma }}</em></del></small>
+                                <span><small>&#8358;{{item.discount_price | floatformat:2 | intcomma}}</small></span>
+                                {% else %}
+                                    <span><small>&#8358;{{item.price | floatformat:2 | intcomma}}</small></span>
+                                {% endif %}
+                            </p>
+                            <form action="{% url 'order:addtoshopcart' %}" method="POST">
+                                {% csrf_token %}
+                                    <input type="hidden" name="quantity" class="span1" value="1">
+                                    <button class="btn btn-outline-primary mb-3" type="submit">Add to cart</button>
+                                    <input type="hidden" name="prodid" value="{{ item.id }}">
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="prev-next">
+                {% if products.has_other_pages %}
+                    {% if products.has_previous %}
+                        <div><a href="?page={{products.previous_page_numer}}">Prev</a></div>
+                    {% else %}
+                    <div><a href="">Prev</a></div>
+                    {% endif %}
+                    {% for item in products.paginator.page_range %}
+                        {% if products.number == item %}
+                            <div>
+                                <a href="{{item}}">{{item}}</a>
+                            </div>
+                        {% else %}
+                            <div>
+                                <a href="?page={{item}}">{{item}}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                        <div><a href="?page={{products.next_page_number}}">Next</a></div>
+                    {% else %}
+                            <div><a href="?page={{products.previous_page_numer}}">Next</a></div>
+                    {% endif %} 
+                {% endif %}
+            </div>
+        </div>
+
+{% endblock prod-content %}
+
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock footer %}

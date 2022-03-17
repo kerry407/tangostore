@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+
+{% block title %} Order Completed  {% endblock title %}
+
+<!-- Header   -->
+{% block prod-header %} {% include "prod-header.html" %} {% endblock prod-header %}
+<!-- Header done  -->
+
+
+{% block content %}
+<!-- order completed details  -->
+<div class="account-page">
+    <div class="container">
+        <h2 class="text-center mt-5 fw-bold">Order Completed <span class="text-success"><i class="fa fa-check-circle-o"></i></span></h2>
+        <div class="row">
+            <div class="">
+                <div class="oform-container text-center mt-5">
+                    <h4>Dear <span style="color: #ff523b;">{{profile.user.first_name}} {{profile.user.last_name}}</span></h4>
+                    <h5 class="mt-1">Your Order is Completed</h5>
+                    <p class="mt-1">Thank You for your patronage</p>
+                </div>
+            </div>     
+        </div>
+    </div>
+</div>
+                                                                                                                                                                                                                                                                            
+<!-- order completed details end here  -->
+{% endblock content %}
+
+<!-- footer   -->

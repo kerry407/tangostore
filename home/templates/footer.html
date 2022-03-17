@@ -1,0 +1,55 @@
+{% load static %}
+
+<style>
+    .footer i{
+        padding: 15px;
+        font-size: 15px;
+    }
+    
+    li a {
+        text-decoration: none;
+    }
+    h6{
+        color: rgb(238, 74, 74);
+        font-weight: bold;
+    }
+   
+</style>
+<div class="container-fluid foot-head">
+    <div class="row footer">
+        <div class="col-lg-3 col-md-6 col-sm-12 foto">
+            <a class="navbar-brand" href="{% url 'index' %}"><h3>tango</h3></a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            
+            <div>
+                <h6 class="ms-4">Navigation</h6>
+                <ul>
+                    <li><a href="{% url 'index' %}">Homepage</a></li>
+                    <li><a href="{% url 'contact' %}">About/Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+           
+           <div>
+            <h6 class="ms-4">My Account</h6>
+               <ul>
+                   <li><a href="{% url 'category' %}">Products</a></li>
+                   <li><a href="#">Wishlist</a></li>
+                   <li><a href="#">Newsletter</a></li>
+               </ul>
+           </div>
+       </div>
+       <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href="#"><i class="fa fa-whatsapp"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-envelope"></i></a>
+       </div>
+    </div>
+</div>
+<div class="container-fluid footer2">
+    <p>COPYRIGHT &copy; 2021 Tango Store.</p>
+</div>

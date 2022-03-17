@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block prod-header %}
+  {% include "prod-header.html" %}
+{% endblock prod-header %}
+
+
+
+{% block user-content %}
+
+    <div class="container pt-5 ps-5 p-4">
+        <div class="row-1">
+            <div class="updateform">
+                <legend class="fw-bold fs-1">Update Profile</legend>
+                <form action="{% url 'userupdate' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        {{profileform.user.email}} <br>
+                        {{profileform.user.username}}<br>
+                        {{profileform.phone}}<br>
+                        {{profileform.address}}<br>
+                        {{profileform.city}}<br>
+                        {{profileform.state}}<br>
+                        {{profileform.country}}<br>
+                        {{profileform.image}}<br>
+                        <button class="btn btn-outline-primary mt-4" type="submit">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock user-content %}
+
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}

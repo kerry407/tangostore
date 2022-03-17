@@ -1,0 +1,233 @@
+{% load static %}
+
+<div class="container-fluid" id="header-banner">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light" id="navbar_top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}"><h3>tango <i class="fa fa-shopping-bag"></i></h3></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+               
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">     
+                    {% if user.id is not None %}                   
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><small>Home</small></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}"><small>Sign-out</small></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'order:shopcart' %}"><i class="fa fa-cart-plus fs-3 text-warning"></i>
+                                    {% if itemcount > 0 %}
+                                        <span class="badge red ">{{ itemcount }}</span>
+                                    {% else %}
+                                        <span class="badge red ">0</span>
+                                    {% endif %} 
+                                </a>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                        <a href="{% url 'userprofile' %}" id="pro-btn" class="profile-btn fw-bold me-1 text-decoration-none"><i class="fa fa-user" id="pro-icon"></i>{{request.user.first_name}}'s Profile</a>         
+                        </form>
+                    {% else %}
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href=""><small>Home</small></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}"><small>Sign In</small></a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                    </div>
+                
+            </div>
+        </nav>
+    </div>
+    <div class="row banner mt-5 ms-0 ps-0" id="bannerr">
+        <div class="col-lg-6 col-md-12 ps-0 ms-0 text-wrap">
+            <h1 class="">BIG SALE</h1>
+            <p>
+                <h5>
+                    {{setting.message|safe}}
+                </h5>
+            </p>
+        </div>
+        <div class="col-lg-6 col-md-12 ">
+            <p class="off"><h4 class="text-warning fw-bold">% OFFER PRODUCT %</h4></p>
+            <img src="{{offer.image.url}}" alt="offer product" class="img-fluid">
+                <button type="" class="shop">
+                    <a href="#top" >SHOP</a>
+                </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Nvabar */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montez&family=Open+Sans+Condensed:wght@300&family=Playfair+Display&display=swap');
+li .nav-link small{
+    color: rgb(12, 12, 12);
+    font-size: 0.9rem;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+li .nav-link small:hover{
+    color: #ff6a00;
+}
+form .btn-danger {
+    width: 100%;
+}
+form a {
+    text-decoration: none;
+    color: #fff;
+
+}
+.navbar-brand {
+    font-family: 'Monoton', cursive;
+    font-size: 2rem;
+    
+}
+.navbar-brand h3{
+    color: #ff6a00;
+}
+.navbar-toggler:focus {   
+    outline: none;
+    outline: none -webkit-focus-ring-color;
+    box-shadow: none;
+}
+
+
+.navbar-toggler:focus {
+    box-shadow: none
+}
+#header-banner {
+    background: linear-gradient(to right, #38383f, #ff6a00);
+}
+.banner {
+    height: fit-content;
+}
+.banner h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 150px;
+  color: #d6874f;
+  margin-top: 40px;
+  margin-left: 15%;
+  line-height: 150px;
+}
+.banner h5{
+    color: #fff;
+    margin-left: 15%;
+    line-height: 35px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.fa-shopping-bag {
+    color: #c76520;
+}
+.badge{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(240, 18, 18);
+    border-radius: 15px;
+    padding-right: 12px;
+    position: relative;
+    bottom: 15px;
+    right: 10px;
+}
+
+.banner h4 {
+  margin-left: 45%;
+}
+.banner img {
+   object-fit: cover;
+   object-position: center;
+   margin-bottom: 0;
+}
+.shop {
+  margin-left: 45%;
+  color: #fff;
+  width: 120px;
+  height: 70px;
+  border: none;
+  background: blueviolet;
+  margin-bottom: 30px;
+}
+.shop a {
+   text-decoration: none;
+   color: white;
+   
+}
+.shop a:hover {
+   color: white;
+   
+}
+
+.fa-user {
+    padding: 0 5px;
+    color: #ff6a00;
+} 
+
+.profile-btn, .profile-btn:hover {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    color: #ff6a00;
+    background-color: rgb(255, 255, 255);
+    border-bottom-width: 2px;
+    text-shadow: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+/* Navbar ends */
+
+@media screen and (min-width:375px) and (max-width:499px) {
+
+.banner h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 110px;
+    color: #d6874f;
+    margin-top: 40px;
+    margin-left: 5%;
+    line-height: 150px;
+}
+.banner h5{
+    color: rgb(224, 222, 222);
+    margin-left: 5%;  
+}
+/* 
+#header-banner {
+    background: linear-gradient(to right, #292929, #ff6a00);
+}
+
+.navbar-brand h3 {
+    color: #ff6e07;
+} */
+
+.banner h4 {
+  margin-left: 15%;
+  margin-top: 40px;
+}
+.banner img {
+   object-fit: cover;
+   object-position: center;
+   margin-bottom: 0;
+}
+.shop {
+  margin-left: 25%;
+  color: #fff;
+  width: 120px;
+  height: 70px;
+  border: none;
+  background: blueviolet;
+  margin-bottom: 30px;
+}
+}
+</style>

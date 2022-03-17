@@ -1,0 +1,100 @@
+{% load static %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montez&family=Open+Sans+Condensed:wght@300&family=Playfair+Display&display=swap');
+    .badge{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(240, 18, 18);
+    border-radius: 15px;
+    padding-right: 12px;
+    position: relative;
+    bottom: 15px;
+    right: 10px;
+}
+
+li .nav-link small{
+    color: rgb(12, 12, 12);
+    font-size: 0.9rem;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+li .nav-link small:hover{
+    color: #ff6a00;
+}
+.fa-shopping-bag {
+    color: #c76520;
+}
+.navbar-brand {
+    font-family: 'Monoton', cursive;
+    font-size: 2rem;
+   
+}
+.navbar-brand h3 {
+    color: #ff6a00;
+    
+}
+.profile-btn, .profile-btn:hover {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    color: #ff6a00;
+    background-color: rgb(255, 255, 255);
+    border-bottom-width: 2px;
+    text-shadow: none;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.fa-user {
+    padding: 0 5px;
+    color: #ff6a00;
+} 
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navs">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"><h3>tango <i class="fa fa-shopping-bag"></i></h3></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+       
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">     
+            {% if user.id is not None %}                   
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><small>Home</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><small>Sign-out</small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'order:shopcart' %}"><i class="fa fa-cart-plus fs-3 text-warning"></i>
+                            {% if itemcount > 0 %}
+                                <span class="badge red ">{{ itemcount }}</span>
+                            {% else %}
+                                <span class="badge red ">0</span>
+                            {% endif %} 
+                        </a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                <a href="{% url 'userprofile' %}" class="profile-btn text-decoration-none fw-bold me-1"><i class="fa fa-user"></i>{{request.user.first_name}}'s Profile</a>    
+                </form>
+            {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><small>Home</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category' %}"><small>Products</small></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"><small>Sign In</small></a>
+                    </li>
+                </ul>
+            {% endif %}
+            </div>
+        
+    </div>
+</nav>

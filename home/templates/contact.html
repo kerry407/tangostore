@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}
+  {{setting.title}}
+{% endblock title %}
+
+
+{% block prod-header %}
+  {% include 'prod-header.html' %}
+{% endblock prod-header %}
+
+{% block content %}
+        <div class="container log log1 mt-5">
+            <h5 class="fw-bold">CONTACT US</h5>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-12 mt-4">
+                   <div class="add">
+                        <div class="red">
+                            <h6>ADDITIONAL INFORMATION</h6>
+                        </div>
+                        <div class="red">
+                            <span class="thick">Phone: <span class="span">{{setting.phone}}</span></span> <br>
+                            <span class="thick">Fax: <span class="span">{{setting.fax}} </span></span> <br>
+                            <span class="thick">Email: <span class="span span1">{{setting.email}}</span></span> <br>
+                        </div>
+                   </div>
+                   <br>
+                   <div class="add">
+                        <div class="red">
+                            <h6>SECONDARY OFFICE IN ABUJA</h6>
+                        </div>
+                        <div class="red">
+                            <span class="thick">Phone: <span class="span">{{setting.secondary_phone}}</span></span> <br>
+                            <span class="thick">Fax: <span class="span">{{setting.secondary_fax}} </span></span> <br>
+                            <span class="thick">Email: <span class="span span1">{{setting.secondary_email}}</span></span> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="add">
+                        <div class="red">
+                            <h6>ABOUT TANGO</h6>
+                        </div>
+                        <div class="red mt-5">
+                            {{about.about|safe}}
+                        </div>
+                   </div>
+                </div>
+                <div class="col-lg-7 col-sm-12">
+                    <div>
+                        <div><p class="fw-bold fs-3">Send Us a Message</p></div>
+                        <form action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                            <div class="were">
+                                <input type="text" class="form-control" name="" id="name" placeholder="First and Last Name">
+                            </div>
+                            <div class="were">
+                                <input type="email" class="form-control" name="" id="email" placeholder="email">
+                            </div>
+                            <div class="were">
+                                <input type="text" class="form-control" placeholder="Subject" name="subject">
+                            </div><br>
+                            <div class="were">
+                                <textarea name="" class="form-control" id="" cols="30" rows="7"></textarea>
+                            </div>
+                            <div class="were">
+                               <button type="submit" class="btn form-buttons">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <style>
+           .form-buttons {
+               height: 50px;
+               width: fit-content;
+               background-color: rgb(240, 18, 18);
+               color: #fff;
+           }
+           .were {
+               margin-top: 20px;
+           }
+       </style>
+
+
+{% endblock content %}
+  
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Product Details
+{% endblock title %}
+
+{% block prod-header %}
+  {% include 'prod-header.html' %}
+{% endblock prod-header %}
+
+{% block prod-content %}
+<style>
+    .btn{
+        text-align: center;
+        font-weight: bold;
+        width: 180px;
+        
+    }
+   
+    .prod-img{
+        width: 50%;
+        margin-left: 35%;
+        object-fit: cover;
+        object-position: center;
+    }
+    .price{
+        font-weight: lighter;
+    }
+    a{
+        text-decoration: none;
+    }
+    .other-image{
+        width: 50%;
+        object-fit: cover;
+        object-position: center;
+    }
+</style>
+
+            <div class="container mt-5">
+                <div class="row justify-md-center">
+                    <div class="col-lg-6 col-md-6 ms-0">
+                        <div>
+                            <img class="prod-img" src="{{product.image.url}}" alt="product-image" class="image-fluid">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="deg">
+                            <p class="osa"><h1 class="fw-bold">{{product.title}}</h1></p><br>
+                                <p class="">Availabilty: <span class="demi">{{product.available}}</span></p>
+                                <h4 class="">Price: 
+                                    {% if product.discount_price %}
+                                    <del><em>&#8358;{{product.price | floatformat:2}}</em></del>
+                                    <span>&#8358;{{product.discount_price| floatformat:2}}</span>
+                                    {% else %}
+                                    <span>&#8358;{{product.price| floatformat:2}}</span>
+                                    {% endif %}
+                                </h4>
+                                <h4><strong>Available Sizes:</strong><span style="color: #ff523b;">{{product.sizes}}</span></h4>
+                                <form  action="{% url 'order:addtoshopcart' %}" method="POST" class="mt-2">
+                                    {% csrf_token %}
+                                    <select name="size">
+                                        <!-- <option>Select Size</option> -->
+                                        <option value="Small">Small</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Large">Large</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                    <label>Qty:</label>
+                                    <input type="number" name="quantity" value="1" min="{{product.minquantity}}" max="{{product.quantity_instock}}">
+                                    <input type="submit" class="btn btn-outline-primary ms-1 mb-1" value="Add To Cart">
+                                    <input type="hidden" name="prodid" value="{{ product.id }}">
+                                </form>    
+                                                
+                                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                                <br>
+                                <p>
+                                    {{product.detail|safe}}
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+            <div class="col-6">
+                <p class="lead"></p>
+            </div> 
+            <div class="col-6"><a href=""><button class="btn btn-success">View More</button></a></div>
+            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    
+                        {% if products %}
+                            {% for item in products  %}
+                                <div class="col-lg-4 col-md-6">
+                                    <a href="{% url 'prod_detail' item.id item.slug %}"><img src="{{item.image.url}}" alt="image-fluid" class="other-image"></a>
+                                        <a href="{% url 'prod_detail' item.id item.slug %}"><h4>{{Item.title}}</h4></a>
+                                    <a href="{% url 'prod_detail' item.id item.slug %}" class="category">{{item.category}}</a>
+                                    <p>
+                                        {% if item.discount_price %}
+                                            <del>${{item.price | floatformat:2}}</del>
+                                            <span>${{item.discount_price | floatformat:2}}</span>
+                                        {% else %}
+                                            <span>${{item.price | floatformat:2}}</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                </div>
+            </div>
+{% endblock prod-content %}
+    
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock footer%}      

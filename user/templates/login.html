@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block user-content %}
+        <div class="title">
+            <p class="lead">
+                <h1>Sign In</h1>
+            </p>
+        </div>
+        <div class="container spice">
+            <form id="LoginForm" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
+                </div>
+                <div class="form-group">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign-in</button>
+            </form>
+            <p class="lead"><h6><a href="{% url 'reset_password' %}" class="text-danger">Forgot password?</a></h6></p>
+        </div>
+        <div>
+            <h5 class="lead form-group">Don't have an account yet?<span><a href="{% url 'register' %}"><button type="submit" class="btn btn-outline-success btn-lg">sign-up</button></a></span></h5>
+        
+        </div>
+                
+        <style>
+            .title{
+                margin: 30px 0 60px 0;
+                text-align: center;
+            }
+            
+            .form-group,
+            button {
+                text-align: center;
+            }
+            #LoginForm .form-control{
+                width: 350px;
+                margin-bottom: 30px;
+                
+            }
+            .btn-primary, 
+            .btn-lg{
+                margin: 0 0 50px 0;
+            }
+            span{
+                position: relative;
+                top: 20px;
+                margin-left: 20px;
+            }
+            .spice{
+            text-align: center;
+            padding: 40px 20px;
+            width: 400px;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover{
+                text-decoration: none;
+            }
+        </style>
+{% endblock user-content %}

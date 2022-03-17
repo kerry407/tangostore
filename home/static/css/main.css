@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Nvabar */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.caro {
+    height: 350px;
+}
+
+
+.hold{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search input{
+    outline: none;
+    border: 1px solid black;
+    border-radius: 40px;
+    font-size: 13px;
+    width: 120%;
+}
+.search input:focus{
+    box-shadow: 0px 0px 10px 0px lightblue;
+    border-radius: 40px;
+    font-size: 13px;
+    width: 120%;
+
+}
+.hold2 li{
+    margin-right: 0px;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.hold2{
+    box-shadow: 0px 0px 3px 0px gray;
+}
+.hold2 li:hover{
+    background-color: orangered;
+    padding: 10px;
+    margin-right: 0px;
+    margin-left: 15px;
+    font-size: 12px;
+    
+   
+}
+.hold2 a:hover{
+    color: white;
+    text-decoration: none;
+    
+}
+
+.carousel img{
+    width: 100%;
+}
+
+.damn{
+    padding: 0;
+    margin-top: 0;
+    border-top: 5px solid teal;
+}
+.stand{
+    padding: 20px;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stand p{
+    text-align: center;
+}
+.feature{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.line-bar{
+    
+    width: 84%;
+    height: 10px;
+    background-image: url(../images/line_bar.png);
+}
+.free{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feature p{
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+span{
+    color: orangered;
+}
+.card{
+    outline: none;
+    border: 1px solid rgb(221, 220, 220);
+    transition: 0.5s ease-in-out;
+}
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: translateY(15px);
+}
+.card a{
+    color: black;
+    text-decoration: none;
+}
+.card a:hover{
+    color: white;
+    text-decoration: none;
+}
+.card-block{
+    text-align: center;
+    transition: 0.3s;
+    background: rgb(245, 243, 243);
+}
+.card-title{
+    color: #242424;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+.see{
+    margin-top: 0;
+    color: orangered;
+}
+.primera{
+    font-size: 25px;
+    position: relative;
+    bottom: 10px;
+    color: black;
+}
+
+.latest{
+    margin-top: 50px;
+}
+
+.image-fluid{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+}
+
+.card-div{
+    display: flex;
+    justify-content: center;
+}
+.card-div .image-fluid{
+    width: 100%;
+}
+.roll{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+}
+.vivo{
+    margin-top: 20px;
+}
+.rotate{
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: orangered;
+    border-radius: 50px;
+}
+/* .rotate img{
+    height: 40px;
+    display: block;
+    -webkit-transition: 0.5s;
+} */
+.roll h5{
+    font-size: 20px;
+    text-align: center;
+}
+.roll span{
+    color: black;
+    font-weight: bold;
+}
+.roll p{
+    text-align: center;
+    font-size: 12px;
+    
+}
+/* .roll:hover .rotate img{
+    -webkit-transform: rotate(360deg) translateZ(0);
+} */
+.line-bar1{
+    width: 90%;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.clients{
+    padding-left: 20px;
+    margin-top: 10px;
+}
+.foot-head{
+    margin-top: 20px;
+    background-color: #242424;
+    padding-top: 15px;
+    color: white;
+}
+.footer li{
+    display: block;
+    margin-left: 10px;
+}
+.footer a{
+    color: white;
+    font-size: 12px;
+}
+.footer a:hover{
+    color: #777;
+}
+.footer img{
+    width: 120px;
+}
+.footer p{
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+.footer2{
+    color:white;
+    background-color: black;
+    
+    display: flex;
+    align-items: center;
+}
+.footer2 p{
+    font-size: 10px;
+    margin-top: 15px;
+}
+
+.prev-next{
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+}
+.prev-next a{
+    text-decoration: none;
+}
+.prev-next div{
+    border: 1px solid lightgray;
+    padding: 5px 15px;
+}
+.number{
+    background-color: lightgray;
+}
+.prev-next div:hover{
+    color: black;
+    background: lightgray;
+}
+
+
+
+/* Responsiveness */
+
+@media only screen and (max-width:560px) {
+   
+    .search input{
+        width: 190%;
+        position: relative;
+        right: 20px;
+        padding: 5px;
+    }
+    .search input:focus{
+        width: 190%;
+        position: relative;
+        right: 20px;
+        padding: 5px;
+    }
+   
+    
+    .hold2 li{
+        display: none;
+    }
+    .small-search{
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        margin-left: 100px;
+        margin-top: 20px;
+    }
+    .carousel{
+        width: 100%;
+        margin-left: 10px;
+    }
+    .stand p{
+        font-size: 20px;
+    }
+    .line-bar{
+        width: 55%;
+    }
+    .card{
+        margin-bottom: 10px;
+    }
+    .rowla{
+        background-color: rgb(231, 231, 231);
+        padding-top: 10px;
+        
+       
+    }
+    .card{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .flu{
+        padding: 25px;
+    }
+    .img-hold{
+        margin-left: 67px;
+    }
+   
+    .img-hold2{
+        margin-left: 67px;
+    }
+    .img-hold3{
+        margin-left: 67px;
+    }
+    .img-hold4{
+        margin-left: 67px;
+    }
+    .clients{
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        margin-left: 125px;
+        
+    }
+    .clients img{
+        margin-bottom: 30px;
+    }
+    .line-bar1{
+        width: 120%;
+    }
+    .footer li{
+        display: inline;
+    }
+    .footer a:hover{
+        color: orangered;
+        text-decoration: none;
+    }
+    /* cart  */
+    td img{
+        height: 35px;
+    }
+    .table th{
+        font-size: 9px;
+        font-weight: bold;
+    }
+    td p{
+        font-size: 9px;
+    }
+    td input{
+        width: 40px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    .random{
+        border-top: 3px solid orangered;
+        box-shadow: 0px 0px 5px 0px lightgray;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        position: relative;
+        left: 0px;
+        bottom: 0px;
+        margin-left: 0px;
+        
+    }
+    .cardo img{
+        width: 350px;
+        height: 300px;
+    }
+    .carousel{
+        position: relative;
+        right: 10px;
+    }
+    .rob{
+      position: relative;
+      left: 15px;
+      background-color: rgb(231, 231, 231);
+      width: 370px;
+      padding: 0px;
+      padding-top: 10px;
+    }
+    .card2{
+        width: 400px;
+        position: relative;
+        right: 20px;
+    }
+    .dim{
+        position: relative;
+        bottom: 0px;
+        
+    }
+    
+    .pus{
+       position: relative;
+       left: 0;
+       top: 0;
+       margin-bottom: 20px;
+       margin-left: 100px;
+    }
+ 
+}

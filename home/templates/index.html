@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<section>
+{% block navbar %}
+{% include "navbar.html" %}
+{% endblock navbar %}
+
+
+{% block feature %}
+{% include "feature.html" %}
+{% endblock feature %}
+
+
+
+{% block late-products %}
+{% include "product_late.html" %}
+{% endblock late-products %}
+
+
+{% block content %}
+{% include "content.html" %}
+{% endblock content %}
+
+{% block offer %}  
+{% include "offer.html" %}
+{% endblock offer %}
+
+{% block manufacturers %}
+{% include "manufacture.html" %}
+{% endblock manufacturers %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock footer %}
+
+
+
+</section>
+

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Category
+{% endblock title %}
+
+{% block prod-header %}
+  {% include 'prod-header.html' %}
+{% endblock prod-header %}
+
+
+{% block prod-content %}
+
+
+
+        <div class="container mx-auto mt-5 text-center" style="width: 300px;"><h4 class="h4 text-dark fw-bold fs-2">ALL Categories</h4></div>
+        <div class="container mt-5 px-4 mb-5">
+            <div class="row">
+                {% if category %}
+                    {% for category in category %}
+                        <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
+                        <div class="card">
+                            <div class="card-div">
+                                <a href="{% url 'prod_list' category.id category.slug %}"><img src="{{category.image.url}}" alt=""  width="250" height="260" class="image-fluid"></a>
+                            </div>
+                            <div class="card-block">
+                                <a href="{% url 'prod_list' category.id category.slug %}"><span class="card-title">{{category.title}}</span></a>
+                            <p class="see"></p>
+                            <p class="primera"></p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="prev-next">
+                {% if category.has_other_pages %}
+                    {% if category.has_previous %}
+                        <div><a href="?page={{category.previous_page_numer}}">Prev</a></div>
+                    {% else %}
+                    <div><a href="" class="text-decoration-none">Prev</a></div>
+                    {% endif %}
+                    {% for item in category.paginator.page_range %}
+                        {% if category.number == item %}
+                            <div>
+                                <a class="text-decoration-none" href="{{item}}">{{item}}</a>
+                            </div>
+                        {% else %}
+                            <div>
+                                <a class="text-decoration-none" href="?page={{item}}">{{item}}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% if category.has_next %}
+                        <div><a class="text-decoration-none" href="?page={{category.next_page_number}}">Next</a></div>
+                    {% else %}
+                            <div><a class="text-decoration-none" href="?page={{category.previous_page_numer}}">Next</a></div>
+                    {% endif %} 
+                {% endif %}
+            </div>
+        </div>
+
+{% endblock prod-content %}
+
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock footer %}
