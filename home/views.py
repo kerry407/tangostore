@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from product.models import *
-from django.core import paginator
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.paginator import Paginator
 from django.contrib import messages
 from product.filters import ProductFilter
 # Create your views here.
@@ -32,7 +31,6 @@ def index(request):
 
 
 def category(request):
-    setting = Setting.objects.get(pk=1)
     offer = Product.objects.get(offer=True)
     category = Category.objects.all()
     category1 = Product.objects.filter(featured=True).order_by('-id')[:4]
@@ -43,7 +41,6 @@ def category(request):
    
 
     context = {
-        'setting': setting,
         'offer': offer,
         'category1': category1,
         'category': paged_category,
@@ -56,8 +53,8 @@ def category(request):
 
 
 
-def prod_list(request,id,slug):
-    setting = Setting.objects.get(pk=1)
+def prod_list(request, id):
+
     category = Category.objects.all()
     catdata = Category.objects.get(pk=1)
     products = Product.objects.filter(category_id=id)
@@ -71,10 +68,8 @@ def prod_list(request,id,slug):
     product = Product.objects.filter(category_id=id)[:1]
     offer1 = Product.objects.filter(offer=True)
 
-
-
     context = {
-        'setting': setting,
+      
         'category': category,
         'catdata': catdata,
         'products': products,
@@ -93,17 +88,12 @@ def prod_list(request,id,slug):
 
 
 
-def prod_detail(request,id,slug):
-    setting = Setting.objects.get(pk=1)
+def prod_detail(request, id):
     category = Category.objects.all()
     products = Product.objects.filter(category_id=id)
     product = Product.objects.get(pk=id)
-  
-    
-   
 
     context = {
-        'setting': setting,
         'category': category,
         'products': products,
         'product': product,

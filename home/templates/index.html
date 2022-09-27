@@ -1,34 +1,206 @@
 {% extends 'base.html' %}
 {% load static %}
-
-<section>
+{% load humanize %}
 {% block navbar %}
 {% include "navbar.html" %}
 {% endblock navbar %}
 
+{% block homepage %}
 
-{% block feature %}
-{% include "feature.html" %}
-{% endblock feature %}
+<section>
+<div class="container-fluid">
+    <div class="feature latest">
+     <div class="free">
+         <p>FEATURED <span>PRODUCTS</span></p>
+     </div>
+     <div class="line-bar">
+         
+         
+     </div>
+     <div>
+         <img src="{% static 'images/arrow-pleft.png' %}" alt="">
+         <img src="{% static 'images/arrow-p.png' %}" alt="">
+     </div>
+    </div>
+ </div>
 
+ <div class="container-fluid">
+     <div class="row">
+         {% if category1 %}
+           {% for item in category1 %}
+             <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
+                <div class="card">
+                    <div class="card-div">
+                        <a href="{% url 'prod_detail' item.id %}"><img src="{{item.image.url}}" alt=""   height="260" class="image-fluid"></a>
+                    </div>
+                    <div class="card-block">
+                    <span class="card-title"><b class="text-wrap">{{item.title}}</b></span>
+                    <p class="see"></p>
+                    <p class="primera mt-3">
+                        {% if item.discount_price %}
+                            <small><del><em>&#8358;{{item.price | floatformat:2 | intcomma }}</em></del></small>
+                            <span><small>&#8358;{{item.discount_price | floatformat:2 | intcomma}}</small></span>
+                        {% else %}
+                            <span><small>&#8358;{{item.price | floatformat:2 | intcomma}}</small></span>
+                        {% endif %}
+                    </p>
+                    <form action="{% url 'order:addtoshopcart' %}" method="POST">
+                        {% csrf_token %}
+                            <input type="hidden" name="quantity" class="span1" value="1">
+                            <button class="btn btn-outline-primary mb-3" type="submit">Add to cart</button>
+                            <input type="hidden" name="prodid" value="{{ item.id }}">
+                    </form>
+                    </div>
+                </div>
+             </div>
+           {% endfor %}
+         {% endif %}
+     </div>
+ </div>
 
+ <div class="container-fluid">
+    <div class="feature latest">
+     <div class="free">
+         <p>LATEST <span>PRODUCTS</span></p>
+     </div>
+     <div class="line-bar">
+         
+         
+     </div>
+     <div>
+         <img src="{% static 'images/arrow-pleft.png' %}" alt="">
+         <img src="{% static 'images/arrow-p.png' %}" alt="">
+     </div>
+    </div>
+ </div>
+ <div class="container-fluid">
+     <div class="row">
+         {% if category %}
+           {% for category in category %}
+             <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
+                <div class="card">
+                    <div class="card-div">
+                        <a href="{% url 'prod_list' category.id  %}"><img src="{{category.image.url}}" alt=""  width="250" height="260" class="image-fluid"></a>
+                    </div>
+                    <div class="card-block">
+                    <span class="card-title text-wrap">{{category.title}}</span>
+                    <p class="see"></p>
+                    <p class="primera"></p>
+                    </div>
+                </div>
+            </div>
+           {% endfor %}
+         {% endif %}
+     </div>
+ </div>
+ <div class="container-fluid vivo">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12">
+            <div class="roll">
+                <div>
+                    <i class="fa fa-check-circle fa-4x"></i>
+                </div>
+                <div>
+                    <h5>SPEEDY <span>DELIVERY </span></h5>
+                    <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+           <div class="roll">
+               <div>
+                <i class="fa fa-bullseye fa-4x" id="bull"></i>
+               </div>
+               <div>
+                   <h5>ELITE <span>CLIENTELE</span></h5>
+                   <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+               </div>
+           </div>
+       </div>
+       <div class="col-lg-4 col-sm-12">
+           <div class="roll">
+               <div>
+                <i class="fa fa-heart fa-4x"></i>
+               </div>
+               <div>
+                   <h5>PRODUCT <span>GUARANTY </span></h5>
+                   <p>Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+               </div>
+           </div>
+       </div>
+    </div>
+</div>
 
-{% block late-products %}
-{% include "product_late.html" %}
-{% endblock late-products %}
+<div class="container-fluid">
+    <div class="feature latest">
+     <div class="free">
+         <p>OFFER <span>PRODUCT</span></p>
+     </div>
+     <div class="line-bar">
+         
+         
+     </div>
+     <div>
+         <img src="{% static 'images/arrow-pleft.png' %}" alt="">
+         <img src="{% static 'images/arrow-p.png' %}" alt="">
+     </div>
+    </div>
+ </div>
+  
+<!-- offer products  -->
 
+{% if offer1 %}
+    {% for offers in offer1 %}
+        <div class="container" id="top">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <img src="{{offers.image.url}}" class="image-fluid offer-image">
+                    <p class="ms-5 fw-bold fs-3">{{offers.title}}</p>
+                </div>
+                <div class="col-lg-6 col-md-6 mt-5 ms-0">
+                    <p class="exclusive fw-bold fs-4">Exclusively available at Tango Store</p>
+                    <h1> </h1>
+                    <h5>
+                        Get the latest offer product today at a great discount price today.
+                    </h5>
+                    <a href="{% url 'prod_detail' offers.id  %}"><button class="shop mt-5" type="button">View Details</button></a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+    
+<!-- offer products done -->
+<div class="container-fluid">
+    <div class="feature latest">
+        <div class="free offer-free">
+            <p>SPONSORS</p>
+        </div>
+        <div class="line-bar line-bar1">
+            
+            
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="clients">
+           
+                <div class="row d-flex">
+                    {% for brands in brand %}
+                        
+                        <div class="col-lg-3 col-md-6 col-sm-12 justify-content-center">
+                            <img src="{{brands.brands.url}}" alt="">
+                        </div>
+                
+                    {% endfor %}
+                        
+                </div>
+            
+        </div>
+    </div>
+</section>
+{% endblock homepage %}
 
-{% block content %}
-{% include "content.html" %}
-{% endblock content %}
-
-{% block offer %}  
-{% include "offer.html" %}
-{% endblock offer %}
-
-{% block manufacturers %}
-{% include "manufacture.html" %}
-{% endblock manufacturers %}
 
 {% block footer %}
 {% include "footer.html" %}
@@ -36,5 +208,5 @@
 
 
 
-</section>
+
 

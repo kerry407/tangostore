@@ -21,10 +21,10 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 mt-3">
                         <div class="card">
                             <div class="card-div">
-                                <a href="{% url 'prod_list' category.id category.slug %}"><img src="{{category.image.url}}" alt=""  width="250" height="260" class="image-fluid"></a>
+                                <a href="{% url 'prod_list' category.id  %}"><img src="{{category.image.url}}" alt=""  width="250" height="260" class="image-fluid"></a>
                             </div>
                             <div class="card-block">
-                                <a href="{% url 'prod_list' category.id category.slug %}"><span class="card-title">{{category.title}}</span></a>
+                                <a href="{% url 'prod_list' category.id  %}"><span class="card-title">{{category.title}}</span></a>
                             <p class="see"></p>
                             <p class="primera"></p>
                             </div>
