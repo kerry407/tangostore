@@ -32,9 +32,29 @@ To install the app, simply clone the repository:
 
 `git clone https://github.com/kerry407/tangostore.git`
 
-Once cloned, navigate to the repository folder and run the following command to install the requirements:
+Create a virtual environment for the Django app:
+
+ `python3 -m venv my_env`
+
+Activate the virtual environment:
+
+`source my_env/bin/activate`
+
+Change into the cloned repository:
+
+`cd repo-name`
+
+After navigating to the repository folder, run the following command to install the requirements:
 
 `pip install -r requirements.txt`
+
+Run migrations to create the app's database:
+
+`python manage.py migrate`
+
+Create a superuser for the app:
+
+`python manage.py createsuperuser`
 
 ## Usage
 
