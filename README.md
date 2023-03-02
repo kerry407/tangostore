@@ -30,7 +30,7 @@ The app requires the following to be installed:
 
 To install the app, simply clone the repository:
 
-`git clone https://github.com/username/ecommerce-clothing-store-app.git`
+`git clone https://github.com/kerry407/tangostore.git`
 
 Once cloned, navigate to the repository folder and run the following command to install the requirements:
 
