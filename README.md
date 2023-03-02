@@ -42,7 +42,7 @@ Activate the virtual environment:
 
 Change into the cloned repository:
 
-`cd repo-name`
+`cd tangostore`
 
 After navigating to the repository folder, run the following command to install the requirements:
 
